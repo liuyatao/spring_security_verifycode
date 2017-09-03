@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="uk-height-1-1">
+<head>
+	<meta charset="UTF-8"/>
+	<title>OAuth2 SSO Demo</title>
+	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.gradient.min.css"/>-->
+
+	<link rel="stylesheet" href="../static/css/materialize.css" th:href="@{~/css/materialize.min.css}">
+	<style>
+		.container{
+			margin-top: 120px;
+		}
+		h4{
+			margin: 30px;
+		}
+	</style>
+</head>
+
+<div class="container">
+	<div class="row">
+		<div class="col s6 offset-s3">
+			<div class="card card-panel">
+
+				<h4 class="center-align">统一授权中心</h4>
+				<form  method="post" th:action="@{/authentication}">
+					<div class="uk-form-row">
+						<input class="uk-width-1-1 uk-form-large" type="text" placeholder="请输入用户名" name="username"/>
+					</div>
+
+					<div class="uk-form-row">
+						<input class="uk-width-1-1 uk-form-large" type="password" placeholder="请输入密码" name="password"/>
+					</div>
+
+					<!--验证码-->
+					<div class="row">
+						<div class="col s8"><input type="text" name="code" placeholder="请输入验证码"></div>
+						<div class="col s3"><img src="" th:src="@{/randCode}" title="点我重新获取验证码"></div>
+					</div>
+
+					<p class="uk-text-danger" th:if="${param.code_error}">
+						验证码输入错误
+					</p>
+
+					<p class="uk-text-danger" th:if="${param.pass_error}">
+						用户名或密码错误
+					</p>
+
+					<p class="uk-text-success" th:if="${param.logout}">
+						已登出
+					</p>
+
+					<div class="row">
+						<div class="s4 col offset-s8">
+							<button class="btn btn-block">登录</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
