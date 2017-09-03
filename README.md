@@ -71,12 +71,12 @@ Spring Security默认是提供一个formLogin的功能的，当没有认证（�
   * 在 `UsernamePasswordAuthenticationFilter`过滤器之前添加了一个LoginAuthenticationFilter，`LoginAuthenticationFilter`的具体实现见步骤6
   
   * 使用`LoginUrlAuthenticationEntryPoint`作为`AuthenticationEntryPoint`，`LoginUrlAuthenticationEntryPoint`的具体实现先步骤7
+  
 
-  4. `kaptcha`生成验证码的配置
+4. `kaptcha`生成验证码的配置
 
-        在maven中引入kaotcha的依赖
 
-        ```xml
+  ```xml
 
         <dependency>
 			<groupId>com.github.axet</groupId>
@@ -84,31 +84,31 @@ Spring Security默认是提供一个formLogin的功能的，当没有认证（�
 			<version>0.0.9</version>
 		</dependency>
 
-        ```
+ ```
 
-        在Spring Security中声明kaptcha的配置Bean
+在maven中引入kaotcha的依赖,并在Spring Security中声明kaptcha的配置Bean
 
-        ``` java
+ ``` java
 
-        /*声明验证码生成策略属性 Bean*/
-        @Bean
-        public DefaultKaptcha captchaProducer(){
-            DefaultKaptcha captchaProducer =new DefaultKaptcha();
-            Properties properties =new Properties();
-            properties.setProperty("kaptcha.border","yes");
-            properties.setProperty("kaptcha.border.color","105,179,90");
-            properties.setProperty("kaptcha.textproducer.font.color","red");
-            properties.setProperty("kaptcha.image.width","125");
-            properties.setProperty("kaptcha.image.height","45");
-            properties.setProperty("kaptcha.textproducer.font.size","45");
-            properties.setProperty("kaptcha.session.key","code");
-            properties.setProperty("kaptcha.textproducer.char.length","4");
-            properties.setProperty("kaptcha.textproducer.font.names","宋体,楷体,微软雅黑");
-            Config config=new Config(properties);
-            captchaProducer.setConfig(config);
-            return  captchaProducer;
-        }
-        ```
+     /*声明验证码生成策略属性 Bean*/
+            @Bean
+            public DefaultKaptcha captchaProducer(){
+                DefaultKaptcha captchaProducer =new DefaultKaptcha();
+                Properties properties =new Properties();
+                properties.setProperty("kaptcha.border","yes");
+                properties.setProperty("kaptcha.border.color","105,179,90");
+                properties.setProperty("kaptcha.textproducer.font.color","red");
+                properties.setProperty("kaptcha.image.width","125");
+                properties.setProperty("kaptcha.image.height","45");
+                properties.setProperty("kaptcha.textproducer.font.size","45");
+                properties.setProperty("kaptcha.session.key","code");
+                properties.setProperty("kaptcha.textproducer.char.length","4");
+                properties.setProperty("kaptcha.textproducer.font.names","宋体,楷体,微软雅黑");
+                Config config=new Config(properties);
+                captchaProducer.setConfig(config);
+                return  captchaProducer;
+            }
+```
 
 5. 在Controller中是实现验证码的请求处理
 
@@ -329,6 +329,10 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
 10. 示例代码
  * [github](https://github.com/liuyatao/spring_security_verifycode 'github')
  * [码云](http://git.oschina.net/liuyatao1992/spring_security_verifycode)
+ 
+11. 效果图
+
+![ff](./image.png)
 
  
 
